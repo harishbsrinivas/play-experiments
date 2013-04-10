@@ -1,8 +1,33 @@
-@(message: String)
+@(projects: List[Project], todoTasks: List[Task])
 
-@main("Welcome to Play 2.1") {
-    
-    @play20.welcome(message, style = "Java")
-    
-    
+@main(projects) {
+
+    <header>
+        <hgroup>
+            <h1>Dashboard</h1>
+            <h2>Tasks over all projects</h2>
+        </hgroup>
+    </header>
+
+    <article  class="tasks">
+        @todoTasks.groupBy(_.project).map {
+            case (project, tasks) => {
+                <div class="folder" data-folder-id="@project.id">
+                    <header>
+                        <h3>@project.name</h3>
+                    </header>
+                    
+                        @tasks.map { task =>
+                            <ul class="list">
+        						@tasks.map { task =>
+           						@views.html.tasks.item(task)
+       							 }
+   							 </ul>
+                        }
+                   
+                </div>
+            }
+        }
+    </article>
+
 }
