@@ -1,0 +1,76 @@
+- &hari !!models.User
+  email: harishbsrinivas@gmail.com
+  name: hari
+  password: supersecretpassword
+
+- &giri !!models.User
+  email: girishsrinivasamurthy@gmail.com
+  name: giri
+  password: secret
+
+- &vagi !!models.User
+  email: vageesh@gmail.com
+  name: vagi
+  password: super
+
+- &umi !!models.User
+  email: umesh@gmail.com
+  name: umi
+  password: password
+
+- &dheeru !!models.User
+  email: dheeraj@gmail.com
+  name: dheeru
+  password: nopassword
+
+- &teju !!models.User
+  email: tejas@gmail.com
+  name: teju
+  password: ujet
+
+- &sid !!models.User
+  email: siddharth@gmail.com
+  name: sid
+  password: truth
+
+- &play1 !!models.Project
+  name: Tutorials
+  folder: Learning
+  members:
+    - *hari
+    - *giri
+
+- &play2 !!models.Project
+  name: To buy
+  folder: Shopping
+  members:
+    - *umi
+    - *vagi
+    - *dheeru
+
+- &Todo !!models.Project
+  name: Things to do
+  folder: Personal
+  members:
+    - *sid
+
+- !!models.Task
+  title: complete play tutorial 1
+  done: true
+  folder: Learning
+  project: *play1
+  assignedTo: *hari
+
+- !!models.Task
+  title: complete play tutorial 2
+  done: false
+  folder: Learning
+  project: *play1
+  assignedTo: *hari
+
+- !!models.Task
+  title: Grow Up!
+  done: false
+  folder: Personal
+  project: *Todo
+  assignedTo: *sid

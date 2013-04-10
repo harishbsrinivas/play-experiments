@@ -1,10 +1,16 @@
 package models;
 
 import models.*;
+
 import org.junit.*;
 import static org.junit.Assert.*;
 import play.test.WithApplication;
 import static play.test.Helpers.*;
+import models.Project;
+
+import java.util.List;
+import com.avaje.ebean.*;
+import play.libs.Yaml;
 
 public class ModelsTest extends WithApplication {
     @Before
@@ -42,7 +48,7 @@ public class ModelsTest extends WithApplication {
         assertEquals("Play 2", results.get(0).name);
     }
 
-     @Test
+    @Test
     public void findTodoTasksInvolving() {
         User hari = new User("harishbsrinivas@gmail.com", "hari", "supersecretpassword");
         hari.save();
@@ -62,5 +68,20 @@ public class ModelsTest extends WithApplication {
         List<Task> results = Task.findTodoInvolving("harishbsrinivas@gmail.com");
         assertEquals(1, results.size());
         assertEquals("Release next version", results.get(0).title);
+    }
+
+    @Test
+    public void fullTest() {
+        Ebean.save((List) Yaml.load("test-data.yml"));
+         // Count things
+        assertEquals(7, User.find.findRowCount());
+        assertEquals(3, Project.find.findRowCount());
+        assertEquals(3, Task.find.findRowCount());
+
+        // Try to authenticate as users
+        assertNotNull(User.authenticate("harishbsrinivas@gmail.com", "supersecretpassword"));
+        assertNotNull(User.authenticate("girishsrinivasamurthy@gmail.com", "secret"));
+        assertNull(User.authenticate("jeff@example.com", "badpassword"));
+        assertNull(User.authenticate("tom@example.com", "secret"));
     }
 }
