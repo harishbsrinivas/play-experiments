@@ -9,13 +9,14 @@ import static play.test.Helpers.*;
 import models.Project;
 
 import java.util.List;
-import com.avaje.ebean.*;
+import com.avaje.ebean.Ebean;
 import play.libs.Yaml;
+
 
 public class ModelsTest extends WithApplication {
     @Before
     public void setUp() {
-        start(fakeApplication(inMemoryDatabase()));
+            start(fakeApplication(inMemoryDatabase(), fakeGlobal()));
     }
 
     @Test
@@ -29,7 +30,7 @@ public class ModelsTest extends WithApplication {
     @Test
     public void tryAuthenticateUser() {
         new User("harishbsrinivas@gmail.com", "hari", "supersecretpassword").save();
-        
+
         assertNotNull(User.authenticate("harishbsrinivas@gmail.com", "supersecretpassword"));
         assertNull(User.authenticate("harishbsrinivas@gmail.com", "badpassword"));
         assertNull(User.authenticate("tom@gmail.com", "secret"));
