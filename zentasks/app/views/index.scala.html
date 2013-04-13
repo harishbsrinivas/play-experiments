@@ -1,6 +1,6 @@
-@(projects: List[Project], todoTasks: List[Task])
+@(projects: List[Project], todoTasks: List[Task], user: User)
 
-@main(projects) {
+@main(projects, user) {
 
     <header>
         <hgroup>
@@ -16,7 +16,7 @@
                     <header>
                         <h3>@project.name</h3>
                     </header>
-                    
+
                         @tasks.map { task =>
                             <ul class="list">
         						@tasks.map { task =>
@@ -24,7 +24,7 @@
        							 }
    							 </ul>
                         }
-                   
+
                 </div>
             }
         }

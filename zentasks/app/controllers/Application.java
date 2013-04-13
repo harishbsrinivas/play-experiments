@@ -10,14 +10,16 @@ import views.html.*;
 
 public class Application extends Controller {
 
-    public static Result index() {
-        return ok(index.render( 
-            Project.find.all(),
-            Task.find.all()
-        )); 
-    }
+  @Security.Authenticated(Secured.class)
+  public static Result index() {
+      return ok(index.render(
+          Project.findInvolving(request().username()),
+          Task.findTodoInvolving(request().username()),
+          User.find.byId(request().username())
+      ));
+  }
 
-    
+
     public static Result login() {
         return ok(login.render(form(Login.class)));
     }
@@ -49,5 +51,13 @@ public class Application extends Controller {
 	}
 
 	}
+
+  public static Result logout() {
+      session().clear();
+      flash("success", "You've been logged out");
+      return redirect(
+          routes.Application.login()
+      );
+  }
 
 }

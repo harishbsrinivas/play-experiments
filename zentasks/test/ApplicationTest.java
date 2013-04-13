@@ -19,6 +19,7 @@ import static org.fest.assertions.Assertions.*;
 
 import models.Project;
 import models.Task;
+import models.User;
 
 import com.avaje.ebean.Ebean;
 
@@ -52,7 +53,9 @@ public class ApplicationTest {
 
         t.add(Task.create(tmpTask,tmpProj.id,"Personal"));
 
-        Content html = views.html.index.render(p,t);
+        User u = new User("harishbsrinivas@gmail.com","hari","supersecretpassword");
+
+        Content html = views.html.index.render(p,t,u);
         assertThat(contentType(html)).isEqualTo("text/html");
         assertThat(contentAsString(html)).contains("fix unit tests");
     }

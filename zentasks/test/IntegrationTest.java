@@ -21,8 +21,8 @@ public class IntegrationTest {
         running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
             public void invoke(TestBrowser browser) {
                 browser.goTo("http://localhost:3333");
-                assertThat(browser.pageSource()).contains("Dashboard");
-                assertThat(browser.pageSource()).contains("Tasks over all projects");
+                assertThat(browser.pageSource()).contains("/assets/stylesheets/login.css");
+                assertThat(browser.pageSource()).contains("form action=\"/login\" method=\"POST\"");
             }
         });
     }
