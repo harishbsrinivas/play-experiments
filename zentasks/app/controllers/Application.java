@@ -67,9 +67,9 @@ public class Application extends Controller {
               controllers.routes.javascript.Projects.add(),
               controllers.routes.javascript.Projects.delete(),
               controllers.routes.javascript.Projects.rename(),
-              controllers.routes.javascript.Projects.addGroup()
-          )
-      );
+              controllers.routes.javascript.Projects.addGroup(),
+                      controllers.routes.javascript.Tasks.add()
+                  ));
   }
 
 }

@@ -2,15 +2,24 @@ package models;
 
 import java.util.*;
 import javax.persistence.*;
+
 import play.db.ebean.*;
+import play.data.format.*;
+import play.data.validation.*;
+
+import com.avaje.ebean.*;
 
 @Entity
 public class Task extends Model {
 
     @Id
     public Long id;
+
+    @Constraints.Required
     public String title;
     public boolean done = false;
+
+    @Formats.DateTime(pattern="MM/dd/yy")
     public Date dueDate;
     @ManyToOne
     public User assignedTo;
@@ -32,5 +41,11 @@ public class Task extends Model {
         task.folder = folder;
         task.save();
         return task;
+    }
+
+    public static List<Task> findByProject(Long project) {
+        return Task.find.where()
+            .eq("project.id", project)
+            .findList();
     }
 }

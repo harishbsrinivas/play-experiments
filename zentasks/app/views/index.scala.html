@@ -13,10 +13,9 @@
         @todoTasks.groupBy(_.project).map {
             case (project, tasks) => {
                 <div class="folder" data-folder-id="@project.id">
-                    <header>
-                        <h3>@project.name</h3>
-                    </header>
-
+                        <header>
+                            <h3><a href="#@routes.Tasks.index(project.id)">@project.name</a></h3>
+                        </header>
                         @tasks.map { task =>
                             <ul class="list">
         						@tasks.map { task =>

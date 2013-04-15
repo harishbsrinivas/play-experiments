@@ -34,12 +34,6 @@ public class Projects extends Controller {
       }
   }
 
-  public static Result addGroup() {
-      return ok(
-          group.render("New group", new ArrayList<Project>())
-      );
-  }
-
   public static Result delete(Long project) {
       if(Secured.isMemberOf(project)) {
           Project.find.ref(project).delete();
@@ -47,6 +41,12 @@ public class Projects extends Controller {
       } else {
           return forbidden();
       }
+  }
+
+  public static Result addGroup() {
+      return ok(
+          group.render("New group", new ArrayList<Project>())
+      );
   }
 
 }
