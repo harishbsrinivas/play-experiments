@@ -18,7 +18,6 @@ public class Article{
   public List<String> categories;
   public List<String> tags;
 
-  @Required
   public String author;
 
   @Required
