@@ -5,7 +5,8 @@
 # Home page
 GET     /                           controllers.Application.index()
 POST    /articles/:id/view          controllers.Application.viewArticle(id: Long)
-POST    /articles/:id/add           controllers.Application.addArticle(id: Long)
+GET     /add              controllers.Application.addArticle()
+POST     /add              controllers.Application.validate()
 POST    /articles/:id/edit          controllers.Application.editArticle(id: Long)
 POST    /articles/:id/delete        controllers.Application.deleteArticle(id: Long)
 POST    /articles/search/:term          controllers.Application.search(term: String)

@@ -7,7 +7,7 @@ import play.data.validation.Constraints.*;
 import javax.persistence.*;
 
 @Entity
-public class Article{
+public class Article extends Model{
 
   @Id
   public Long id;
@@ -15,14 +15,15 @@ public class Article{
   @Required
   public String title;
 
-  public List<String> categories;
-  public List<String> tags;
-
-  public String author;
+  public List<String> categories = new ArrayList<String>();
+  public List<String> tags = new ArrayList<String>();
 
   @Required
-  public String createdDate;
-  public String modifiedDate;
+  public User author;
+
+  @Required
+  public  Date createdDate;
+  public Date modifiedDate;
 
   @Required
   public String body;
@@ -30,23 +31,27 @@ public class Article{
   public int favCount;
   public int rating;
 
-  public static void create(){
+  public  void create(String title, List<String> categories, List<String> tags, User userName, String body){
+    this.title = title;
+    this.categories = categories;
+    this.tags = tags;
+    this.author = userName;
+    this.body = body;
+  }
+
+  public void addArticle(){
 
   }
 
-  public static void addArticle(){
+  public void viewArticle(){
 
   }
 
-  public static void viewArticle(){
+  public void deleteArticle(){
 
   }
 
-  public static void deleteArticle(){
-
-  }
-
-  public static void search(){
+  public void search(){
 
   }
 }

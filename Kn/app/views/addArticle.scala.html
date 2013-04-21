@@ -1,0 +1,30 @@
+@(form: Form[Application.AddArticle])
+
+<html>
+    <head>
+        <title>Zentasks</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
+    </head>
+    <body>
+        <header>
+            <a href="@routes.Application.index" id="logo"><span>Kn</span></a>
+        </header>
+        @helper.form(routes.Application.validate) {
+           <h1>Add Article</h1>
+
+           <p>
+               <input type="text" name="title" placeholder="title" value="@form("title").value">
+           </p>
+           <p>
+               <input type="text" name="body" placeholder="" value="@form("body").value">
+           </p>
+           <p>
+               <button type="submit">Add</button>
+           </p>
+           <p>
+               <button type="reset">clear</button>
+           </p>
+        }
+    </body>
+</html>
