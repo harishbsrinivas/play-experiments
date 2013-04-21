@@ -1,0 +1,35 @@
+@(form: Form[Application.Login])
+
+<html>
+    <head>
+        <title>Add Article</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
+    </head>
+    <body>
+        <header>
+            <a href="@routes.Application.index" id="logo"><span>Kn</span></a>
+        </header>
+        @if(form.hasGlobalErrors) {
+            <p class="error">
+                @form.globalError.message
+            </p>
+        }
+        @helper.form(routes.Application.login) {
+           <h1>Login</h1>
+
+           <p>
+               <input type="text" name="Email" placeholder="you@@example.com" value="@form("email").value">
+           </p>
+           <p>
+               <input type="password" name="Password" placeholder="secret" value="@form("password").value">
+           </p>
+           <p>
+               <button type="submit">Login</button>
+           </p>
+           <p>
+               <button type="reset">Clear</button>
+           </p>
+        }
+    </body>
+</html>

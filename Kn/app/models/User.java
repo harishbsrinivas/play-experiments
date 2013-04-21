@@ -21,4 +21,17 @@ public class User extends Model {
     public static Finder<String,User> find = new Finder<String,User>(
         String.class, User.class
     );
+
+    public static Result authenticate() {
+        Form<Login> loginForm = form(Login.class).bindFromRequest();
+        if (loginForm.hasErrors()) {
+            return badRequest(login.render(loginForm));
+        } else {
+            session().clear();
+            session("email", loginForm.get().email);
+            return redirect(
+                routes.Application.index()
+            );
+        }
+    }
 }
